@@ -7,7 +7,7 @@ This bundle helps you to easily generate slugs for your Eloquent models.
 
 You can install Sluggable by using Artisan CLI:
 ```php
-php artisan install sluggable
+php artisan bundle:install sluggable
 ```
 
 Also we need to add Sluggable to our applications 'bundles.php' and auto-load it:
@@ -19,7 +19,7 @@ return array(
 ```
 
 ##Usage
-Sluggable can be configured on each Eloquent model by adding the following code to your model:
+Sluggable can be configured on each Eloquent model by adding the following code:
 
 ```php
 class Page extends Eloquent
