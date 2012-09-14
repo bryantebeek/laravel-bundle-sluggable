@@ -102,5 +102,4 @@ class Sluggable
         // done!
         return true;
     }
-
 }
