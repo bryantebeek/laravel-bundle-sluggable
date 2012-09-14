@@ -116,6 +116,16 @@ class Sluggable_Test extends PHPUnit_Framework_TestCase
         $class::$sluggable['unique'] = true;
     }
 
+    public function testMultipleBuildFrom() {
+        $class = get_class($this->model);
+        $class::$sluggable['build_from'] = array('title', 'other_title_field');
+
+        Sluggable::make($this->model, false, array());
+        $this->assertEquals("this-is-a-test-this-is-another-test", $this->model->slug);
+
+        $class::$sluggable['build_from'] = 'title';
+    }
+
     public function tearDown() {
         $this->model = null;
     }

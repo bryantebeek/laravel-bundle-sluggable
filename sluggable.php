@@ -71,11 +71,9 @@ class Sluggable
 
     /**
      * This functions load our configuration in a few steps:
-     *
      * 1. We get the configuration from the model
      * 2. We get the 'sluggable' configuration from the main application
      * 3. We get the 'sluggable' configuration from our bundle
-     *
      * Then we merge the configurations and save them for later use.
      */
     protected function configure()
@@ -94,13 +92,27 @@ class Sluggable
      */
     protected function slug()
     {
-        $string = $this->model->{$this->configuration['build_from']};
+        $build_from = $this->configuration['build_from'];
+        if (isset($build_from))
+        {
+            $build_from = !is_array($build_from) ? array($build_from) : $build_from;
+
+            $string = '';
+            foreach ($build_from as $field)
+            {
+                $string .= $this->model->{$field}.' ';
+            }
+        } else
+        {
+            $string = $this->model->__toString();
+        }
+
         $separator = $this->configuration['separator'];
         return Str::slug($string, $separator);
     }
 
     /**
-     * @param string $slug The slug which we are going to determine the existence of
+     * @param string                           $slug    The slug which we are going to determine the existence of
      * @param \Laravel\Database\Eloquent\Model $objects An array of {@link \Laravel\Database\Eloquent\Model} which we are going to test our slug against to see if it already exists.
      *
      * @return mixed If an object exists with the same slug, return it, otherwise return false.
@@ -131,7 +143,7 @@ class Sluggable
     }
 
     /**
-     * @param string $slug The current slug, which we are going to append an index to.
+     * @param string                           $slug   The current slug, which we are going to append an index to.
      * @param \Laravel\Database\Eloquent\Model $object The object with the slug with the highest index
      *
      * @return string The newly calculated slug
