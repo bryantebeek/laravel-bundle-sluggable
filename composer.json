@@ -1,0 +1,24 @@
+{
+    "name": "bryantebeek/laravel-sluggable",
+    "description": "Easy automatic slug generation for your Eloquent models",
+    "homepage": "https://github.com/bryantebeek/laravel-bundle-sluggable",
+    "keywords": [
+        "laravel",
+	"slug",
+	"sluggable"
+    ],
+    "authors": [
+        {
+	    "name": "Bryan te Beek",
+            "email": "bryantebeek@gmail.com"
+	}
+    ],
+    "require": {
+        "php": ">=5.3.7"
+    },
+    "autoload": {
+       "psr-0": {
+           "Sluggable": "src/"
+       }
+    }
+}
