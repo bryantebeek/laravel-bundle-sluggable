@@ -4,17 +4,18 @@
     "homepage": "https://github.com/bryantebeek/laravel-bundle-sluggable",
     "keywords": [
         "laravel",
-	"slug",
-	"sluggable"
+        "slug",
+        "sluggable"
     ],
     "authors": [
-        {
-	    "name": "Bryan te Beek",
-            "email": "bryantebeek@gmail.com"
-	}
+    {
+        "name": "Bryan te Beek",
+        "email": "bryantebeek@gmail.com"
+    }
     ],
     "require": {
-        "php": ">=5.3.7"
+        "php": ">=5.3.7",
+        "laravel/support": "~4"
     },
     "autoload": {
        "psr-0": {

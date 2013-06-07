@@ -1,5 +1,12 @@
 <?php
 
+namespace Sluggable;
+
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Event;
+
+
 /**
  * Easily slugify all your Eloquent models
  *
@@ -28,7 +35,6 @@ class Sluggable
     public static function make($model, $force = false, $objects = null)
     {
         $class = get_class($model);
-
         // If the class has no sluggable configuration, there is nothing to be done so we stop.
         if (!isset($class::$sluggable))
         {
@@ -79,10 +85,13 @@ class Sluggable
     protected function configure()
     {
         $class = get_class($this->model);
-        $model_configuration = $class::$sluggable;
-        $default_configuration = Config::get('sluggable', Config::get('sluggable::sluggable', array()));
+        $model_config = $class::$sluggable;
 
-        $this->configuration = array_merge($default_configuration, $model_configuration);
+        $package_default_config = Config::get('sluggable::config');
+        $app_default_config = Config::get('sluggable');
+        $default_config = array_merge($package_default_config, $app_default_config);
+
+        $this->configuration = array_merge($default_config, $model_config);
     }
 
     /**
@@ -124,7 +133,7 @@ class Sluggable
         if (!isset($objects))
         {
             // Get the objects with a slug like our preffered one and choose the one with the highest index prepended.
-            $object = $class::where($this->configuration['save_to'], 'LIKE', $slug.'%')->order_by(
+            $object = $class::where($this->configuration['save_to'], 'LIKE', $slug.'%')->orderBy(
                 $this->configuration['save_to'],
                 'DESC'
             )->first();
