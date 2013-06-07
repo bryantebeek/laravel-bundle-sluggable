@@ -1,8 +1,9 @@
 <?php
 
-include(Bundle::path('sluggable').'sluggable.php');
+namespace Sluggable;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Sluggable_Test extends PHPUnit_Framework_TestCase
+class SluggableTest extends \PHPUnit_Framework_TestCase
 {
     private $model = null;
 
