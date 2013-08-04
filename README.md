@@ -1,9 +1,8 @@
 # Sluggable
-=========
+
+> **Warning!** This package is not maintained anymore as I've moved to Laravel 4 a long time ago.
 
 Easy automatic slug generation for your Eloquent models.
-
-
 
 ## Installing the Bundle
 
